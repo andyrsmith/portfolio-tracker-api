@@ -36,7 +36,7 @@ const getAccounts = (req, res) => {
     accountDBServer.retrieveAccounts().then((accounts) => {
         res.status(200);
         res.send({
-            status: "status",
+            status: "success",
             data: accounts
         })
     });

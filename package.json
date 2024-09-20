@@ -4,7 +4,7 @@
   "description": "Track Investments and Debts",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon --env-file=.env src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
