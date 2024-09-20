@@ -9,4 +9,6 @@ router.post('/monthly-amounts', createAccountValidator, trackerController.create
 
 router.put('/update-monthly-amount', updateAccountValidator, trackerController.updateAccount);
 
+router.delete('/delete-monthly-amount/:id', trackerController.deleteAccount);
+
 module.exports = router;

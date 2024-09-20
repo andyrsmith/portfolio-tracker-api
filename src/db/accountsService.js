@@ -15,9 +15,14 @@ const updateAccountRecord = async(id, record) => {
     return await Account.findOneAndUpdate({_id: id}, record, {new: true});
 }
 
+const deleteAccountRecord = async(id) => {
+    return await Account.deleteOne({_id: id});
+}
+
 module.exports = {
     createNewAccountRecord,
     retrieveAccounts,
-    updateAccountRecord
+    updateAccountRecord,
+    deleteAccountRecord
 }
 

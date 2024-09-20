@@ -14,21 +14,31 @@ const createNewAccount = (req, res) => {
         }
         accountDBServer.createNewAccountRecord(values).then((account) => {
             res.status(201);
-            console.log('in here');
-            res.send(account);
+            res.send({
+                status: "success",
+                data: account
+            });
         }).catch((err) => {
-            // how should I send back errors
-            res.status(400).json({errors: err});
+            res.status(400).json({
+                status: "error",
+                errors: err
+            });
         })
     } else {
-        res.status(400).json({errors: errors.array()});
+        res.status(400).json({
+            status: "error",
+            errors: errors.array()
+        });
     }
 }
 
 const getAccounts = (req, res) => {
     accountDBServer.retrieveAccounts().then((accounts) => {
         res.status(200);
-        res.send(accounts)
+        res.send({
+            status: "status",
+            data: accounts
+        })
     });
 
 };
@@ -47,17 +57,53 @@ const updateAccount = (req, res) => {
         }
         accountDBServer.updateAccountRecord(id, values).then((account) => {
             res.status(201);
-            res.send(account);
+            res.send({
+                status: "success",
+                data: account
+            });
         }).catch((err) => {
-            res.status(400).json({errors: err});
+            res.status(400).json({
+                status: "error",
+                errors: err
+            });
         });
     } else {
-        res.status(400).json({errors: errors.array()});
+        res.status(400).json({
+            status: "error",
+            errors: errors.array()
+        });
+    }
+};
+
+const deleteAccount = (req, res) => {
+    if(req.params.id) {
+        const id = req.params.id;
+        accountDBServer.deleteAccountRecord(id).then((response) => {
+            if(response.deletedCount > 0) {
+                res.status(200);
+                res.send({status: "deleted"});
+            } else {
+                res.status(404);
+                res.send({status: "Record not found"});
+            }
+        }).catch((err) => {
+            res.status(400).json({
+                status: "error",
+                errors: err
+            });
+        });
+
+    } else {
+        res.status(400).json({
+            status: "error",
+            errors: "No ID found\n"
+        });
     }
 };
 
 module.exports = {
     createNewAccount,
     getAccounts,
-    updateAccount
+    updateAccount,
+    deleteAccount
 };
