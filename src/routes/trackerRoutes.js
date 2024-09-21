@@ -3,9 +3,9 @@ const router = express.Router();
 const trackerController = require('../controllers/trackerController');
 const { createAccountValidator, updateAccountValidator } = require('../validators/accountValidator');
 
-router.get('/get-accounts',  trackerController.getAccounts);
+router.get('/get-monthly-amounts',  trackerController.getAccounts);
 
-router.post('/monthly-amounts', createAccountValidator, trackerController.createNewAccount);
+router.post('/create-monthly-amount', createAccountValidator, trackerController.createNewAccount);
 
 router.put('/update-monthly-amount', updateAccountValidator, trackerController.updateAccount);
 

@@ -1,4 +1,4 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(`mongodb://${process.env.DBCONNECTION}/test?retryWrites=true&w=majority`);
+mongoose.connect(`mongodb://${process.env.DBCONNECTION}/${process.env.DBNAME}?retryWrites=true&w=majority`);
 
